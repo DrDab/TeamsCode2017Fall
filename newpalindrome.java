@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class newpalindrome 
+public class palindrome 
 {
 	public static int lps(String str)
 	{
@@ -34,13 +34,43 @@ public class newpalindrome
 		int len = lps(str);
 		return n - len;
 	}
+	public static String removeSpaces(String str)
+	{
+		StringBuilder sb = new StringBuilder(str);
+		for(;;)
+		{
+			if (getSpaceIndex(sb) == -1) // there are no more spaces!
+			{
+		//		System.out.println(sb.toString());
+				return sb.toString();
+			}
+			else
+			{
+				sb.deleteCharAt(getSpaceIndex(sb));
+			}
+		}
+	}
+	public static int getSpaceIndex(StringBuilder str)
+	{
+		char[] s = str.toString().toCharArray();
+		for (int i = 0; i < s.length; i++)
+		{
+			if (s[i] == ' ')
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
 	public static void main (String[] args) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new FileReader("palindrome.txt"));
 		int length = Integer.parseInt(br.readLine());
 		for(int i = 0; i < length; i++)
 		{
-			System.out.println(minNumDeletions(br.readLine()));
+			String s = br.readLine();
+		//	System.out.println(s);
+			System.out.println(minNumDeletions(removeSpaces(s)));
 		}
 	}
 }
